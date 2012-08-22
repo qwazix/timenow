@@ -30,13 +30,19 @@ manager::manager()
     mceInterface = new QDBusInterface(MCE_SERVICE, MCE_REQUEST_PATH,
                                       MCE_REQUEST_IF, connection, this);
 
-//    MyProximitySensor *prx = new MyProximitySensor();
-//    QObject::connect(prx, SIGNAL(sensorOpen()), this, SLOT(printTime()));
+    QDBusMessage msg = QDBusMessage::createMethodCall(
+            "proximityd.method.change", // --dest
+            "/proximityd/method/change", // destination object path
+            "proximityd.method.change", // message name (w/o method)
+            "Change" // method
+        );
+     msg << QString("turnOn");  // number hidden in posting
+     msg << getpid();
+     QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
+     qDebug()<<reply;
 
-    timerCheck = new QTimer(this);
-    connect(timerCheck, SIGNAL(timeout()), this, SLOT(checkProximity()));
-    timerCheck->start(100);
-    connect(this, SIGNAL(sensorOpen()), this, SLOT(printTime()));
+    QDBusConnection sessionConnection = QDBusConnection::sessionBus();
+    sessionConnection.connect("", "/proximityd/signal/state", "proximityd.signal.state", "changed", this, SLOT(printTime(QString)));
 
     timerOff = new QTimer(this);
     connect(timerOff, SIGNAL(timeout()), this, SLOT(off()));
@@ -49,13 +55,27 @@ manager::manager()
     //printTime("d");
 }
 
+manager::~manager(){
+    QDBusMessage msg = QDBusMessage::createMethodCall(
+            "proximityd.method.change", // --dest
+            "/proximityd/method/change", // destination object path
+            "proximityd.method.change", // message name (w/o method)
+            "Change" // method
+        );
+     msg << QString("turnOff");  // number hidden in posting
+     msg << getpid();
+     QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
+     qDebug()<<reply;
+}
+
 void manager::controlPolling(QDBusMessage& reply){
     QString status = reply.arguments().value(0).value<QString>();
     if (status == MCE_TK_LOCKED) timerCheck->start(); else timerCheck->stop();
 }
 
-void manager::printTime(){
-    if (checkIfLockedAndBlank()){
+void manager::printTime(QString state){
+    qDebug("stateChanged");
+    if (checkIfLockedAndBlank()&&state=="open"){
           QProcess::startDetached( "/opt/timenowd/bin/shcript", QStringList() << " " );
           sleep(500);
           QDateTime now = QDateTime::currentDateTime();

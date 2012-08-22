@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ "$(pidof lpmn900Daemon)" ]
+if [ "$(pidof timenowd)" ]
 then
 /sbin/initctl stop timenow.conf
 fi

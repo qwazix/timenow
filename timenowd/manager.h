@@ -13,12 +13,13 @@ class manager : public QObject
 
 public:
     manager();
+    ~manager();
 
 signals:
     void sensorOpen();
 
 public Q_SLOTS:
-    void printTime();
+    void printTime(QString);
     void refreshTime();
     void checkProximity();
     void off();
