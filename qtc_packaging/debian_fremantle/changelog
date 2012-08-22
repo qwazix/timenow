@@ -1,0 +1,11 @@
+timenow (0.0.2) unstable; urgency=low
+  * Added date (doesn't work with non-latin characters)
+  * Fixed bug with phone operation
+
+ -- Michael Demetriou <qwazix@unknown>  Tue, 31 Jul 2012 20:45:01 +0300
+
+timenow (0.0.1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Michael Demetriou <qwazix@unknown>  Sun, 08 Jul 2012 18:18:46 +0300

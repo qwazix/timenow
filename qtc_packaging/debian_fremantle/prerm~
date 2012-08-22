@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ "$(pidof lpmn900Daemon)" ]
+then
+/sbin/initctl stop lpmn900Daemon.conf
+fi

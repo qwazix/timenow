@@ -1,0 +1,12 @@
+#!/bin/sh
+
+chmod +x /opt/timenowd/bin/shcript
+chmod +x /opt/timenowd/bin/shcriptoff
+
+if [ "$(pidof timenowd)" ]
+then
+/sbin/initctl stop timenow.conf
+/sbin/initctl start timenow.conf
+else
+/sbin/initctl start timenow.conf
+fi

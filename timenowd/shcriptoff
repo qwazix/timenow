@@ -1,0 +1,2 @@
+#!/bin/sh
+sh -c 'echo "echo 1 > /sys/class/graphics/fb0/blank; echo 0 > /sys/class/backlight/acx565akm/brightness; " | sudo gainroot'
