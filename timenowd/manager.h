@@ -3,6 +3,7 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 #include <QTimer>
+#include <QSettings>
 
 class QDBusMessage;
 class QDBusInterface;
@@ -36,6 +37,8 @@ private:
     int firstTime;
     bool proximityState;
     bool checkIfLockedAndBlank();
+    QString getSetting(QString, QString);
+    QString getSetting(QString);
 
 
 };

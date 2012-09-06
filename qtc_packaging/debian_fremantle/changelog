@@ -1,3 +1,15 @@
+timenow (0.0.4) unstable; urgency=low
+  * Added configuration file ~/.timenow/settings.ini
+
+ -- Michael Demetriou <qwazix@unknown>  Wed, 29 Aug 2012 19:12:26 +0300
+
+timenow (0.0.3) unstable; urgency=low
+  * Phone bug still reported
+  * Uses proximityd for proximity sensor polling
+  * Postrm now stops upstart job
+
+ -- Michael Demetriou <qwazix@unknown>  Wed, 22 Aug 2012 18:13:37 +0300
+
 timenow (0.0.2) unstable; urgency=low
   * Added date (doesn't work with non-latin characters)
   * Fixed bug with phone operation

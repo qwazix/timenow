@@ -9,6 +9,8 @@
 #include <QDateTime>
 #include <QTimer>
 #include <QFile>
+#include <QSettings>
+#include <QDir>
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -81,6 +83,10 @@ void manager::printTime(QString state){
           QDateTime now = QDateTime::currentDateTime();
           QFile file("/sys/class/graphics/fb0/rotate");
           int x = 35, s = 14, sdate = 3, xdate = -300;
+          QString l3x = getSetting("line3x","0");
+          QString l3y = getSetting("line3y","0");
+          QString l4x = getSetting("line4x","0");
+          QString l4y = getSetting("line4y","0");
           if ( file.open(QIODevice::ReadOnly) ) {
           // file opened successfully
                   QTextStream t( &file );        // use a text stream
@@ -89,10 +95,18 @@ void manager::printTime(QString state){
                       s = 10;
                       sdate = 2;
                       xdate = -100;
+                      l3x = getSetting("line3xPortrait","0");
+                      l3y = getSetting("line3yPortrait","0");
+                      l4x = getSetting("line4xPortrait","0");
+                      l4y = getSetting("line4yPortrait","0");
                   }
           }
-            QProcess::startDetached( "/usr/bin/text2screen", QStringList() << "-t " + now.toString("HH:mm") << "-s "+ QString::number(s) << "-T 0xFFFFFF" << "-B 0x000000" << "-H center" << "-y 0" );
-            QProcess::startDetached( "/usr/bin/text2screen", QStringList() << "-t " + now.toString("dddd dd/MM/yyyy") << "-s "+ QString::number(sdate) << "-T 0xFFFFFF" << "-B 0x000000" << "-x "+QString::number(xdate) << "-y 300" );
+          QString dateFormat;
+          if (getSetting("displayday","false")=="false") dateFormat = "dd/MM/yyyy"; else dateFormat = "dddd dd/MM/yyyy";
+          QProcess::startDetached( "/usr/bin/text2screen", QStringList() << "-t " + now.toString("HH:mm") << "-s "+ QString::number(s) << "-T "+getSetting("color","0xFFFFFF") << "-B "+getSetting("backgroundcolor","0x000000") << "-H center" << "-y 0" );
+          QProcess::startDetached( "/usr/bin/text2screen", QStringList() << "-t " + now.toString(dateFormat) << "-s "+ QString::number(sdate) << "-T "+getSetting("color","0xFFFFFF") << "-B "+getSetting("backgroundcolor","0x000000") << "-x "+QString::number(xdate) << "-y 300" );
+          if (getSetting("3rdline","")!="") QProcess::startDetached( "sh", QStringList() << "-c" << "/usr/bin/text2screen -t \"" + getSetting("3rdline") + "\" -s "+ QString::number(sdate) + " -T "+getSetting("color","0xFFFFFF") + " -B "+getSetting("backgroundcolor","0x000000") + " -x "+ l3x + " -y " + l3y );
+          if (getSetting("4thline","")!="") QProcess::startDetached( "sh", QStringList() << "-c" << "/usr/bin/text2screen -t \"" + getSetting("4thline") + "\" -s "+ QString::number(sdate) + " -T "+getSetting("color","0xFFFFFF") + " -B "+getSetting("backgroundcolor","0x000000") + " -x "+ l4x + " -y " + l4y );
 //          printApixel();
 //          timer->start(60000);
           timerOff->start(6000);
@@ -224,4 +238,20 @@ void manager::sleep(int ms)
         struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
         nanosleep(&ts, NULL);
     }
+}
+
+QString manager::getSetting(QString name, QString defaultval){
+    QString settingsFilePath = QDir::homePath () + "/.timenow/settings.ini";
+    if (!QFile::exists(settingsFilePath)) {
+        if (!QDir(QDir::homePath () + "/.timenow").exists()) QDir(QDir::homePath ()).mkdir(".timenow");
+        QFile::copy("/opt/timenowd/conf/settings.ini", settingsFilePath);
+    }
+    QSettings settings(settingsFilePath, QSettings::IniFormat);
+    settings.beginGroup("display");
+    return settings.value(name, defaultval).toString();
+    settings.endGroup();
+}
+
+QString manager::getSetting(QString name){
+    return getSetting(name, "");
 }
