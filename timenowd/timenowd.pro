@@ -38,10 +38,10 @@ OTHER_FILES += \
     shcript \
     timenow.conf \
     settings.ini \
-    powerbutton.txt
+    powerbutton
 
 shcriptfile.path = /opt/timenowd/bin
-shcriptfile.files = shcript shcriptoff
+shcriptfile.files = shcript shcriptoff powerbutton
 INSTALLS += shcriptfile
 
 mydaemon.path = /etc/event.d
@@ -52,6 +52,8 @@ INSTALLS += mydaemon
 settings.path = /opt/timenowd/conf
 settings.files = settings.ini
 INSTALLS += settings
+
+
 
 
 

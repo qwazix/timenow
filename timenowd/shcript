@@ -1,3 +1,9 @@
 #!/bin/sh
-sh -c 'echo "echo 0 > /sys/class/graphics/fb0/blank; echo 2 > /sys/class/backlight/acx565akm/brightness; " | sudo gainroot'
-text2screen -c -B 0x000000
+sh -c 'echo "/opt/timenowd/bin/powerbutton;" | sudo gainroot'
+#sh -c 'echo "/opt/timenowd/bin/powerbutton; sleep 0.5; echo 2 > /sys/class/backlight/acx565akm/brightness; " | sudo gainroot'
+#sleep 3
+#for i in 1 2 3
+#do
+#sh -c 'echo "/opt/timenowd/bin/powerbutton;" | sudo gainroot'
+#sleep 3
+#done

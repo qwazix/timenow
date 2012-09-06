@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by Qt Creator 2.3.1, 2012-09-06T20:50:41. -->
+<!-- Written by Qt Creator 2.3.1, 2012-09-06T22:57:17. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -208,11 +208,15 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">MaemoMountAndInstallDeployStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
+       <value type="QString">/home/qwazix/pro/timenow-build-maemo-Qt_for_Fremantle_PR1_3_Devices__Qt_SDK__Release/timenow_0_0_4_armel.deb</value>
+       <value type="QString">/home/qwazix/pro/timenow-build-maemo-Qt_for_Fremantle_PR1_3_Devices__Qt_SDK__Release/timenow_0_0_5_armel.deb</value>
        <value type="QString">/home/qwazix/pro/timenow-build-maemo-Qt_for_Fremantle_PR1_3_Devices__Qt_SDK__Release/timenow_0_0_2_armel.deb</value>
        <value type="QString">/home/qwazix/pro/timenow-build-maemo-Qt_for_Fremantle_PR1_3_Devices__Qt_SDK__Release/timenow_0_0_1_armel.deb</value>
        <value type="QString">/home/qwazix/pro/timenow-build-maemo-Qt_for_Fremantle_PR1_3_Devices__Qt_SDK__Release/timenow_0_0_3_armel.deb</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
+       <value type="QString">192.168.1.19</value>
+       <value type="QString">192.168.1.19</value>
        <value type="QString">192.168.1.19</value>
        <value type="QString">192.168.1.15</value>
        <value type="QString">192.168.1.19</value>
@@ -221,8 +225,12 @@
        <value type="QString"></value>
        <value type="QString"></value>
        <value type="QString"></value>
+       <value type="QString"></value>
+       <value type="QString"></value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
+       <value type="QDateTime">2012-09-06T22:30:15</value>
+       <value type="QDateTime">2012-09-06T22:50:08</value>
        <value type="QDateTime">2012-08-22T17:46:11</value>
        <value type="QDateTime">2012-07-31T20:43:13</value>
        <value type="QDateTime">2012-08-29T18:53:09</value>

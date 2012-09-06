@@ -21,22 +21,20 @@ signals:
 
 public Q_SLOTS:
     void printTime(QString);
-    void refreshTime();
     void checkProximity();
     void off();
     void controlPolling(QDBusMessage&);
+    void controlPolling(QString);
+    void killEverybody();
 
 
 private:
     QDBusInterface *mceInterface;
-    QTimer *timer;
-    QTimer *timerCheck;
-    QTimer *timerOff;
-    void printApixel();
     void sleep(int);
     int firstTime;
     bool proximityState;
     bool checkIfLockedAndBlank();
+    QDBusMessage modifyProximitydState(QString);
     QString getSetting(QString, QString);
     QString getSetting(QString);
 

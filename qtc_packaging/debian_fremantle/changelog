@@ -1,3 +1,13 @@
+timenow (0.0.6) unstable; urgency=low
+  * <Add change description here>
+
+ -- Michael Demetriou <qwazix@unknown>  Thu, 06 Sep 2012 22:50:32 +0300
+
+timenow (0.0.5) unstable; urgency=low
+  * <Add change description here>
+
+ -- Michael Demetriou <qwazix@unknown>  Thu, 06 Sep 2012 22:32:31 +0300
+
 timenow (0.0.4) unstable; urgency=low
   * Added configuration file ~/.timenow/settings.ini
 
