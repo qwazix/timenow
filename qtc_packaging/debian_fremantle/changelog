@@ -1,3 +1,15 @@
+timenow (0.0.8) unstable; urgency=low
+  * Minor tidyup
+  * Phone bug fixed :)
+
+ -- Michael Demetriou <qwazix@unknown>  Fri, 07 Sep 2012 19:09:16 +0300
+
+timenow (0.0.7) unstable; urgency=low
+  * Displays lockscreen instead of framebuffer
+  * Configurable timeout
+
+ -- Michael Demetriou <qwazix@unknown>  Fri, 07 Sep 2012 16:34:52 +0300
+
 timenow (0.0.6) unstable; urgency=low
   * <Add change description here>
 

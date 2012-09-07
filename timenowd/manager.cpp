@@ -178,7 +178,10 @@ bool manager::checkIfLockedAndBlank(){
     const QDBusMessage& reply = mceInterface->call(MCE_DISPLAY_STATUS_GET);
     QString display = reply.arguments().value(0).value<QString>();
 
-    if (display == MCE_DISPLAY_OFF_STRING && checkIfLocked()){
+    const QDBusMessage& reply2 = mceInterface->call(MCE_CALL_STATE_GET);
+    QString callstatus = reply2.arguments().value(0).value<QString>();
+
+    if (display == MCE_DISPLAY_OFF_STRING && checkIfLocked() && callstatus != MCE_CALL_STATE_ACTIVE && callstatus != MCE_CALL_STATE_RINGING){
         return true;
     } else return false;
 }
