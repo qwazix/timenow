@@ -26,17 +26,22 @@ public Q_SLOTS:
     void controlPolling(QDBusMessage&);
     void controlPolling(QString);
     void killEverybody();
-
+    void pressPower();
 
 private:
     QDBusInterface *mceInterface;
     void sleep(int);
     int firstTime;
     bool proximityState;
+    QTimer *keepTkLockOn, *pressPowerTimer;
+    void setLockScreenMode(QString);
+    void setDisplayMode(QString);
     bool checkIfLockedAndBlank();
+    bool checkIfLocked();
     QDBusMessage modifyProximitydState(QString);
     QString getSetting(QString, QString);
     QString getSetting(QString);
+
 
 
 };
