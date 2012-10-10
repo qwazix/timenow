@@ -33,12 +33,22 @@ manager::manager()
     mceInterface = new QDBusInterface(MCE_SERVICE, MCE_REQUEST_PATH,
                                       MCE_REQUEST_IF, connection, this);
 
-    QDBusMessage msg = modifyProximitydState("turnOn");
+    modifyProximitydState("turnOn");
+
+
+    QDBusMessage msg = QDBusMessage::createMethodCall(
+            "proximityd.method.change", // --dest
+            "/proximityd/method/change", // destination object path
+            "proximityd.method.change", // message name (w/o method)
+            "Change" // method
+        );
+
     msg << QString("changeInterval");
     msg << getpid();
-    msg << getSetting("interval","600").toInt();
+    msg << getSetting("interval","2000").toInt();
     QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
 
+    qDebug() << reply;
     QDBusConnection sessionConnection = QDBusConnection::sessionBus();
     sessionConnection.connect("", "/proximityd/signal/state", "proximityd.signal.state", "changed", this, SLOT(printTime(QString)));
 
@@ -88,9 +98,23 @@ void manager::controlPolling(QDBusMessage& reply){
 
 void manager::controlPolling(QString status){
     if (status == MCE_TK_LOCKED) {
+
         modifyProximitydState("turnOn");
+        QDBusMessage msg = QDBusMessage::createMethodCall(
+                "proximityd.method.change", // --dest
+                "/proximityd/method/change", // destination object path
+                "proximityd.method.change", // message name (w/o method)
+                "Change" // method
+            );
+
+        msg << QString("changeInterval");
+        msg << getpid();
+        msg << getSetting("interval","2000").toInt();
+        QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
+        qDebug() << reply;
     } else {
-        modifyProximitydState("turnOff");
+        QDBusMessage msg = modifyProximitydState("turnOff");
+        //qDebug() << msg;
         pressPowerTimer->stop();
 //        killEverybody();
     }
