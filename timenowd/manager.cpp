@@ -91,6 +91,7 @@ void manager::controlPolling(QString status){
         modifyProximitydState("turnOn");
     } else {
         modifyProximitydState("turnOff");
+        pressPowerTimer->stop();
 //        killEverybody();
     }
 }
@@ -120,7 +121,7 @@ void manager::setDisplayMode(QString mode){
 }
 
 void manager::pressPower(){
-    QProcess::startDetached( "/opt/timenowd/bin/shcript", QStringList() << " " );
+    if (checkIfLocked()) QProcess::startDetached( "/opt/timenowd/bin/shcript", QStringList() << " " );
 }
 
 void manager::printTime(QString state){
@@ -137,6 +138,7 @@ void manager::printTime(QString state){
         pressPowerTimer->stop();
         keepTkLockOn->stop();
         if (checkIfLocked()) setDisplayMode("off");
+        setLockScreenMode("locked");
     }
 
 }

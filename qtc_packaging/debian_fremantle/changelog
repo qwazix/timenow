@@ -1,3 +1,13 @@
+timenow (0.0.10) unstable; urgency=low
+  * <Add change description here>
+
+ -- Michael Demetriou <qwazix@unknown>  Tue, 11 Sep 2012 01:07:54 +0300
+
+timenow (0.0.9) unstable; urgency=low
+  * Fixed executable bit on powerbutton script
+
+ -- Michael Demetriou <qwazix@unknown>  Sat, 08 Sep 2012 01:02:45 +0300
+
 timenow (0.0.8) unstable; urgency=low
   * Minor tidyup
   * Phone bug fixed :)
