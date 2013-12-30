@@ -33,6 +33,7 @@ private:
     void sleep(int);
     int firstTime;
     bool proximityState;
+    bool proximityPollingState;
     QTimer *keepTkLockOn, *pressPowerTimer;
     void setLockScreenMode(QString);
     void setDisplayMode(QString);
